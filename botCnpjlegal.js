@@ -43,7 +43,7 @@ const start = (client) => {
         .catch((erro) => {
           console.log(erro);
         })
-    }, i * tempoDeEnvio(7)) // Tempo de envio entre mensagens
+    }, i * tempoDeEnvio(10)) // Tempo de envio entre mensagens
 
   }
 }
