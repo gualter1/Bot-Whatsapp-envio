@@ -5,7 +5,7 @@ const xlsx = require("xlsx")
 let atendente = fs.readFileSync("./DadosEnvio/atendente.txt", "utf-8")
 let textoMsg = fs.readFileSync("./DadosEnvio/mensagem.txt", "utf-8")
 
-const tabelaDados = xlsx.readFile("./DadosEnvio/Cnpjlegal.xlsx")
+const tabelaDados = xlsx.readFile("./DadosEnvio/BancoDeDados.xlsx")
 const primeiraAba = tabelaDados.SheetNames[0];
 const planilha = tabelaDados.Sheets[primeiraAba];
 const dados = xlsx.utils.sheet_to_json(planilha);
@@ -22,26 +22,17 @@ venom.create({
 const start = (client) => {
 
   const mensagem = montaMensagem(atendente, dados, textoMsg)
-  //console.log(mensagem);
 
   for (let i = 0; i < mensagem.length; i++) {
 
     setTimeout(() => {
 
-        // client.sendImageAsSticker(mensagem[i][0], './DadosEnvio/CnpjLegal.png') // Envio do sticker
-        // .then(() => {
-        //   console.log('✅ Sticker enviado com sucesso');
-        // })
-        // .catch((erro) => {
-        //   console.error('❌ Erro ao enviar sticker:', erro);
-        // });
-
         client.sendText(mensagem[i][0], mensagem[i][1]) // Envio da mensagem 
         .then(() => {
-          console.log(`Mensagem enviada para o numero ${i+2} da tabela. NOME: ${padronizaNome(dados[i].nome)} | Telefone: ${dados[i].telefone}`);
+          console.log(`Mensagem enviada para o numero ${i+2} da tabela. ✅ NOME: ${padronizaNome(dados[i].nome)} | Telefone: ${dados[i].telefone}`);
         })
-        .catch((erro) => {
-          console.log(erro);
+        .catch(() => {
+          console.log(`Mensagem enviada para o numero ${i+2} da tabela. ❌ Não consegui manda mensagem pro número informado, talvez não exista o telefone ${dados[i].telefone}`);
         })
     }, i * tempoDeEnvio(10)) // Tempo de envio entre mensagens
 
