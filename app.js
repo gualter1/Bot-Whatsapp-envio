@@ -34,7 +34,7 @@ const start = (client) => {
         .catch(() => {
           console.log(`Mensagem enviada para o numero ${i+2} da tabela. ❌ Não consegui manda mensagem pro número informado, talvez não exista o telefone ${dados[i].telefone}`);
         })
-    }, i * tempoDeEnvio(10)) // Tempo de envio entre mensagens
+    }, i * tempoDeEnvio(30)) // Tempo de envio entre mensagens
 
   }
 }
@@ -78,8 +78,13 @@ function tiraNove(telefone) {
 }
 
 function tempoDeEnvio(segundos) {
-  const tempo = segundos * 1000
-  return tempo
+let multiplicador = Math.random().toFixed(2) * segundos + 1
+
+multiplicador < 5 ? multiplicador = multiplicador + 5 : multiplicador
+
+const tempo = (segundos + multiplicador) * 1000
+console.log(tempo)
+return tempo 
 }
 
 function montaMensagem(atendente, dadosEnvio, mensagem) {
