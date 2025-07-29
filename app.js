@@ -96,6 +96,7 @@ function montaMensagem(atendente, dadosEnvio, mensagem) {
     let listaTelefones = dadosEnvio[i].telefone
        
     let texto = `Olá *${listaCliente},* meu nome é ${atendente.trim()}, falo em nome da CNPJ Legal. Tudo bem?\n\nEsse contato é referente ao CNPJ *${converteCnpj(listaCnpj)}.*\n\n${mensagem}`
+   // let texto = `Olá *${listaCliente},* meu nome é ${atendente.trim()}, falo em nome da CNPJ Legal. Tudo bem?*\n\n${mensagem}\n\nEsse contato é referente ao CNPJ *${converteCnpj(listaCnpj)}.`
   
     const trataTelefone = tiraNove(listaTelefones.toString().trim())
     dadosEMsg.push([`${trataTelefone}@c.us`, texto])
